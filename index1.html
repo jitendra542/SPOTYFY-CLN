@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spotify Clone</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2 class="logo">Spotify</h2>
+    <ul class="menu">
+      <li><i class="fa-solid fa-house"></i> Home</li>
+      <li><i class="fa-solid fa-magnifying-glass"></i> Search</li>
+      <li><i class="fa-solid fa-book"></i> Your Library</li>
+    </ul>
+    <hr>
+    <ul class="menu">
+      <li><i class="fa-solid fa-plus"></i> Create Playlist</li>
+      <li><i class="fa-regular fa-heart"></i> Liked Songs</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h2>Trending Now</h2>
+    <div class="albums">
+      <div class="album" onclick="playSong('./Songs/10.mp3', 'O Mere Sona Re', 'Guru Randhava', './Cover/10.jpg')">
+        <img src="./Cover/10.jpg" alt="Album">
+        <p class="title">O Mere Sona Re</p>
+        <p class="artist">Guru Randhava</p>
+      </div>
+
+      <div class="album" onclick="playSong('./Songs/1.mp3', 'Ban Ja Tu Meri Rani', 'Guru Randhava', './Cover/1.jpg')">
+        <img src="./Cover/1.jpg" alt="Album">
+        <p class="title">Ban Ja Tu Meri Rani</p>
+        <p class="artist">Guru Randhava</p>
+      </div>
+
+      <div class="album" onclick="playSong('./Songs/4.mp3', 'Hayye Oye', 'Arijit Singh', './Cover/4.jpgg')">
+        <img src="./Cover/4.jpg" alt="Album">
+        <p class="title">Hayye Oye</p>
+        <p class="artist">Arijit Singh</p>
+      </div>
+
+      <div class="album" onclick="playSong('./Songs/2.mp3', 'Janiye', 'Guru Randhava', './Cover/2.jpg')">
+        <img src="./Cover/2.jpg" alt="Album">
+        <p class="title">Janiye</p>
+        <p class="artist">Guru Randhava</p>
+      </div>
+
+      <div class="album" onclick="playSong('./Songs/3.mp3', 'Nain ta Heere', 'Guru Randhava', './Cover/3.jpg')">
+        <img src="./Cover/3.jpg" alt="Album">
+        <p class="title">Nain ta Heere</p>
+        <p class="artist">Guru Randhava</p>
+      </div>
+
+      <div class="album" onclick="playSong('./Songs/5.mp3', 'Dheere Dheere', 'Guru Randhava', './Cover/5.jpg')">
+        <img src="./Cover/5.jpg" alt="Album">
+        <p class="title">Dheere Dheere</p>
+        <p class="artist">Guru Randhava</p>
+      </div>
+
+      <div class="album" onclick="playSong('./Songs/6.mp3', 'Bekhayali', 'Guru Randhava', './Cover/6.jpg')">
+        <img src="./Cover/6.jpg" alt="Album">
+        <p class="title">Bekhayali</p>
+        <p class="artist">Guru Randhava</p>
+      </div>
+
+      <div class="album" onclick="playSong('./Songs/7.mp3', 'Fakira By Sanam', 'Guru Randhava', './Cover/7.jpg')">
+        <img src="./Cover/7.jpg" alt="Album">
+        <p class="title">Fakira By Sanam</p>
+        <p class="artist">Guru Randhava</p>
+      </div>
+
+      <div class="album" onclick="playSong('./Songs/8.mp3', 'Jeene Laga Hu', 'Guru Randhava', './Cover/8.jpg')">
+        <img src="./Cover/8.jpg" alt="Album">
+        <p class="title">Jeene Laga Hu</p>
+        <p class="artist">Guru Randhava</p>
+      </div>
+
+      <div class="album" onclick="playSong('./Songs/9.mp3', 'Zara Zara By Jalraj', 'Guru Randhava', './Cover/9.jpg')">
+        <img src="./Cover/9.jpg" alt="Album">
+        <p class="title">Zara Zara By Jalraj</p>
+        <p class="artist">Guru Randhava</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Music Player -->
+  <div class="player">
+    <div class="player-left">
+      <img id="player-img" src="./assets/spotify-minimal-playlist-album-cover-floral-design-template-386954a3206172a6251e3639ba986976_screen.jpg" alt="">
+      <div>
+        <p id="player-title">Spotify Songs</p>
+        <p id="player-artist">All Artists</p>
+      </div>
+    </div>
+
+    <div class="player-center">
+      <div class="controls">
+        <i class="fa-solid fa-backward-step"></i>
+        <i class="fa-solid fa-play" id="playPauseBtn" onclick="togglePlay()"></i>
+        <i class="fa-solid fa-forward-step"></i>
+      </div>
+      <input type="range" id="seekbar" value="0" step="1">
+    </div>
+
+    <div class="player-right">
+      <i class="fa-solid fa-volume-high"></i>
+      <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+    </div>
+  </div>
+
+  <audio id="audio"></audio>
+
+  <script>
+    const audio = document.getElementById("audio");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    const seekbar = document.getElementById("seekbar");
+    const volume = document.getElementById("volume");
+
+    function playSong(src, title, artist, img) {
+      audio.src = src;
+      document.getElementById("player-title").innerText = title;
+      document.getElementById("player-artist").innerText = artist;
+      document.getElementById("player-img").src = img;
+      audio.play();
+      playPauseBtn.classList.replace("fa-play", "fa-pause");
+    }
+
+    function togglePlay() {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.classList.replace("fa-play", "fa-pause");
+      } else {
+        audio.pause();
+        playPauseBtn.classList.replace("fa-pause", "fa-play");
+      }
+    }
+
+    audio.addEventListener("timeupdate", () => {
+      seekbar.max = audio.duration;
+      seekbar.value = audio.currentTime;
+    });
+
+    seekbar.addEventListener("input", () => {
+      audio.currentTime = seekbar.value;
+    });
+
+    volume.addEventListener("input", () => {
+      audio.volume = volume.value;
+    });
+  </script>
+</body>
+</html>
